@@ -8,7 +8,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -48,32 +48,29 @@
 
 <!-- ===================== HERO ===================== -->
 <section class="hero">
-  <div class="hero-islands" aria-hidden="true">
-    <svg viewBox="0 0 1200 500" preserveAspectRatio="xMidYMax slice">
-      <path class="hero-water" d="M0,420 C150,390 250,450 400,420 C550,390 650,450 800,420 C950,390 1050,450 1200,420 L1200,500 L0,500 Z"/>
-      <ellipse class="hero-blob" cx="180" cy="360" rx="70" ry="26"/>
-      <ellipse class="hero-blob" cx="620" cy="340" rx="95" ry="30"/>
-      <ellipse class="hero-blob" cx="1000" cy="365" rx="75" ry="24"/>
+  <div class="hero-line" aria-hidden="true">
+    <svg viewBox="0 0 1200 200" preserveAspectRatio="none">
+      <path class="hero-path" d="M0,140 C 250,60 350,180 600,110 C 850,40 950,160 1200,90" fill="none" stroke-width="1.5"/>
     </svg>
   </div>
 
   <div class="hero-content">
-    <p class="eyebrow">Percorsi di inserimento lavorativo · Legge 68/99</p>
-    <h1>Isola Formativa</h1>
-    <p class="hero-subtitle">Un ponte tra le persone e il mondo del lavoro. Costruiamo, un passo alla volta, percorsi concreti di formazione, autonomia e inclusione.</p>
-    <div class="hero-actions">
+    <p class="eyebrow fade-up" style="animation-delay:.05s">Percorsi di inserimento lavorativo · Legge 68/99</p>
+    <h1 class="fade-up" style="animation-delay:.15s">Isola Formativa</h1>
+    <p class="hero-subtitle fade-up" style="animation-delay:.3s">Un ponte tra le persone e il mondo del lavoro. Costruiamo, un passo alla volta, percorsi concreti di formazione, autonomia e inclusione.</p>
+    <div class="hero-actions fade-up" style="animation-delay:.45s">
       <a href="#percorsi" class="btn btn-primary">Scopri i percorsi</a>
       <a href="#contatti" class="btn btn-ghost">Parla con noi</a>
     </div>
   </div>
 
   <!--
-    [IMMAGINE AI — HERO]
+    [IMMAGINE AI — HERO, opzionale]
     Descrizione: fotografia orizzontale, luce calda naturale, un piccolo gruppo (3-4 persone di età ed
-    abilità diverse) al lavoro insieme in un laboratorio artigianale luminoso o in un orto sociale,
-    espressioni serene e concentrate, stile documentaristico non patinato, colori tenui verde-oceano
-    e ocra coerenti con la palette del sito. Nessun testo nell'immagine.
-    Formato consigliato: 1920x1080, da usare come sfondo hero con overlay scuro leggero.
+    abilità diverse) al lavoro insieme in un laboratorio artigianale luminoso, espressioni serene e
+    concentrate, stile documentaristico non patinato, tono sobrio coerente con blu istituzionale e
+    verde. Nessun testo nell'immagine. Se aggiunta, va come sfondo con overlay scuro leggero,
+    mantenendo la linea animata come elemento secondario.
   -->
 </section>
 
@@ -227,28 +224,36 @@
 
     <div class="resource-grid">
       <a href="#" class="resource-item">
-        <span class="resource-icon" aria-hidden="true">📘</span>
+        <span class="resource-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H12v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H12v16h6.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg>
+        </span>
         <div>
           <h3>Guida alla Legge 68/99</h3>
           <p>Cos'è, a chi si rivolge e come attivarla tramite il collocamento mirato.</p>
         </div>
       </a>
       <a href="#" class="resource-item">
-        <span class="resource-icon" aria-hidden="true">🧭</span>
+        <span class="resource-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5 13 13l-4.5 2.5L11 11z"/></svg>
+        </span>
         <div>
           <h3>Come funziona un'Isola Formativa</h3>
           <p>Durata, obiettivi e cosa aspettarsi da un percorso di un anno.</p>
         </div>
       </a>
       <a href="#" class="resource-item">
-        <span class="resource-icon" aria-hidden="true">🤝</span>
+        <span class="resource-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 12a3 3 0 1 1 6 0 3 3 0 0 1-6 0Z"/><path d="M4 20c0-3 3-5 8-5s8 2 8 5"/></svg>
+        </span>
         <div>
           <h3>Rete dei partner</h3>
           <p>Cooperative sociali, tutor e aziende che rendono possibile ogni percorso.</p>
         </div>
       </a>
       <a href="#" class="resource-item">
-        <span class="resource-icon" aria-hidden="true">📄</span>
+        <span class="resource-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 3.5h7l4 4V19a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 19V5A1.5 1.5 0 0 1 7 3.5Z"/><path d="M13.5 3.5V8h4"/></svg>
+        </span>
         <div>
           <h3>Materiali e documenti</h3>
           <p>Approfondimenti e documentazione raccolta da incontri ed esperienze dirette.</p>
@@ -267,8 +272,14 @@
       <p class="light">Sei un'azienda interessata al collocamento mirato, una cooperativa sociale o una persona che vuole saperne di più? Scrivici, ti risponderemo al più presto.</p>
 
       <ul class="contact-list">
-        <li>📍 Vimercate, Lombardia</li>
-        <li>✉️ <a href="mailto:info@isolaformativa.it">info@isolaformativa.it</a></li>
+        <li>
+          <span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span>
+          Vimercate, Lombardia
+        </li>
+        <li>
+          <span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="5.5" width="17" height="13" rx="1.5"/><path d="m4.5 6.5 7.5 6 7.5-6"/></svg></span>
+          <a href="mailto:info@isolaformativa.it">info@isolaformativa.it</a>
+        </li>
       </ul>
 
       <div class="social-row">
