@@ -80,11 +80,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // =========================================================
 // Effetto "ricomposizione" — solo per #missioneText.
-// Funzione autonoma: non tocca menu, reveal generico o form.
+// Il movimento è agganciato allo scroll (non a un timer):
+// più scrolli veloce, più le lettere convergono veloci.
+// Ogni lettera ha una soglia casuale d'ingresso e arriva
+// da sinistra o destra con una rotazione 3D su asse casuale.
+// Una volta completato (testo al centro schermo), resta
+// fisso: non torna indietro nemmeno risalendo con lo scroll.
 // =========================================================
 (function shatterTextEffect() {
   const el = document.getElementById('missioneText');
   if (!el) return;
+
+  // Chi preferisce meno animazioni vede subito il testo normale
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const originalText = el.textContent.trim();
 
@@ -97,8 +105,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const visual = document.createElement('span');
   visual.setAttribute('aria-hidden', 'true');
 
+  const letters = [];
   const words = originalText.split(' ');
-  let letterIndex = 0;
+  const axes = [
+    [1, 0, 0],   // asse orizzontale
+    [0, 1, 0],   // asse verticale
+    [1, 1, 0],   // diagonale \
+    [1, -1, 0],  // diagonale /
+  ];
 
   words.forEach((word, wIndex) => {
     const wordSpan = document.createElement('span');
@@ -109,19 +123,20 @@ document.addEventListener('DOMContentLoaded', () => {
       letterSpan.className = 'shatter-letter';
       letterSpan.textContent = char;
 
-      // Posizione iniziale casuale ma contenuta: frammenti, non caos
-      const tx = (Math.random() * 60 - 30).toFixed(1) + 'px';   // -30px .. 30px
-      const ty = (Math.random() * -50 - 10).toFixed(1) + 'px';  // -60px .. -10px (dall'alto, senso di "risalita")
-      const r  = (Math.random() * 24 - 12).toFixed(1) + 'deg';  // -12deg .. 12deg
-      const delay = Math.min(letterIndex * 0.014, 0.9).toFixed(3) + 's';
+      const fromLeft = Math.random() < 0.5;
+      const distance = window.innerWidth / 2 + 80 + Math.random() * 260;
 
-      letterSpan.style.setProperty('--tx', tx);
-      letterSpan.style.setProperty('--ty', ty);
-      letterSpan.style.setProperty('--r', r);
-      letterSpan.style.setProperty('--d', delay);
+      letters.push({
+        node: letterSpan,
+        tx: fromLeft ? -distance : distance,
+        ty: Math.random() * 90 - 45,
+        axis: axes[Math.floor(Math.random() * axes.length)],
+        angle: 70 + Math.random() * 190,
+        start: Math.random() * 0.7,            // soglia casuale: NON legata all'ordine nella frase
+        range: 0.2 + Math.random() * 0.25,
+      });
 
       wordSpan.appendChild(letterSpan);
-      letterIndex++;
     });
 
     visual.appendChild(wordSpan);
@@ -134,15 +149,62 @@ document.addEventListener('DOMContentLoaded', () => {
   el.appendChild(srSpan);
   el.appendChild(visual);
 
-  // Trigger allo scroll: parte quando il blocco entra nel viewport
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        el.classList.add('is-visible');
-        observer.unobserve(el);
-      }
-    });
-  }, { threshold: 0.4 });
+  let locked = false;
+  let ticking = false;
 
-  observer.observe(el);
+  function easeOutCubic(x) {
+    return 1 - Math.pow(1 - x, 3);
+  }
+
+  // 0 = blocco non ancora arrivato, 1 = blocco al centro schermo
+  function overallProgress() {
+    const rect = el.getBoundingClientRect();
+    const elementCenter = rect.top + rect.height / 2;
+    const viewportCenter = window.innerHeight / 2;
+    const startPoint = window.innerHeight;
+    const endPoint = viewportCenter;
+    const raw = (startPoint - elementCenter) / (startPoint - endPoint);
+    return Math.min(Math.max(raw, 0), 1);
+  }
+
+  function render() {
+    ticking = false;
+    if (locked) return;
+
+    const progress = overallProgress();
+
+    letters.forEach((L) => {
+      const localProgress = Math.min(Math.max((progress - L.start) / L.range, 0), 1);
+      const eased = easeOutCubic(localProgress);
+      const tx = L.tx * (1 - eased);
+      const ty = L.ty * (1 - eased);
+      const angle = L.angle * (1 - eased);
+
+      L.node.style.transform =
+        `translate3d(${tx.toFixed(1)}px, ${ty.toFixed(1)}px, 0) rotate3d(${L.axis[0]}, ${L.axis[1]}, ${L.axis[2]}, ${angle.toFixed(1)}deg)`;
+      L.node.style.opacity = localProgress < 0.04 ? '0' : '1';
+    });
+
+    if (progress >= 1) lockInPlace();
+  }
+
+  function lockInPlace() {
+    locked = true;
+    letters.forEach((L) => {
+      L.node.style.transform = 'none';
+      L.node.style.opacity = '1';
+    });
+    window.removeEventListener('scroll', onScroll);
+    window.removeEventListener('resize', onScroll);
+  }
+
+  function onScroll() {
+    if (locked || ticking) return;
+    ticking = true;
+    requestAnimationFrame(render);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
 })();
