@@ -513,10 +513,10 @@ a{ color: inherit; text-decoration: none; }
 }
 
 /* =========================================================
-   Effetto "accensione" — solo per il testo della Missione
+   Effetto "ricomposizione" — solo per il testo della Missione
    (#missioneText). Scoped, non tocca il resto del sito.
-   Il colore di ogni parola è calcolato in JS in base allo
-   scroll: qui serve solo il layout di base.
+   Il movimento è calcolato in JS in base alla posizione di
+   scroll: qui serve solo il contesto 3D e il layout di base.
    ========================================================= */
 .sr-only{
   position: absolute;
@@ -528,7 +528,17 @@ a{ color: inherit; text-decoration: none; }
   border: 0;
 }
 
-.ignite-text .ignite-word{
+.shatter-text{
+  perspective: 700px;
+}
+
+.shatter-text .shatter-word{
   display: inline-block;
+  white-space: nowrap;
+}
+
+.shatter-text .shatter-letter{
+  display: inline-block;
+  backface-visibility: hidden;
 }
 

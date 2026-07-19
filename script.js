@@ -1,542 +1,198 @@
-/* =========================================================
-   ISOLA FORMATIVA — style.css
-   Direzione: bianco/nero, un solo accento acceso, angoli
-   squadrati, tipografia da poster sportivo. Nessuna icona.
-   ========================================================= */
+// =========================================================
+// ISOLA FORMATIVA — script.js
+// =========================================================
 
-:root{
-  /* Colori — base bianco/nero + un solo accento usato con disciplina */
-  --ink:        #0A0A0A;   /* nero quasi puro — testo, sfondi scuri */
-  --ink-soft:   #4A4A4A;   /* testo secondario su sfondo chiaro */
-  --paper:      #FFFFFF;   /* bianco puro */
-  --sand:       #F2F2F2;   /* grigio chiarissimo, sfondo alternato */
-  --accent:     #C6FF3D;   /* verde lime acceso — unico accento */
-  --accent-ink: #0A0A0A;   /* testo su sfondo accento */
-  --gray:       #8A8A8A;   /* dettagli, bordi secondari */
-  --line:       rgba(10,10,10,0.14);
+document.addEventListener('DOMContentLoaded', () => {
 
-  /* Tipografia */
-  --font-display: 'Bebas Neue', sans-serif;
-  --font-body: 'Montserrat', sans-serif;
+  // ---------- Anno corrente nel footer ----------
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* Ritmo — angoli squadrati, nessun radius */
-  --radius: 0px;
-  --radius-sm: 0px;
-  --container: 1160px;
-  --section-pad: clamp(64px, 9vw, 120px);
-}
+  // ---------- Menu mobile ----------
+  const navToggle = document.getElementById('navToggle');
+  const mainNav = document.getElementById('mainNav');
 
-*, *::before, *::after{ box-sizing: border-box; }
-html{ scroll-behavior: smooth; }
+  if (navToggle && mainNav) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = mainNav.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
 
-body{
-  margin:0;
-  font-family: var(--font-body);
-  background: var(--paper);
-  color: var(--ink-soft);
-  line-height: 1.6;
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-}
-
-h1,h2,h3{
-  font-family: var(--font-display);
-  color: var(--ink);
-  line-height: 1;
-  margin: 0 0 0.4em;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
-}
-
-h1{ font-size: clamp(3.2rem, 9vw, 6.5rem); }
-h2{ font-size: clamp(2.2rem, 5vw, 3.4rem); max-width: 20ch; }
-h3{ font-size: 1.4rem; }
-
-p{ margin: 0 0 1em; }
-a{ color: inherit; text-decoration: none; }
-
-.container{
-  width: 100%;
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-.eyebrow{
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--ink);
-  margin: 0 0 14px;
-  border-left: 3px solid var(--accent);
-  padding-left: 10px;
-  display: inline-block;
-}
-.eyebrow-light{ color: var(--paper); }
-
-.lead{
-  font-size: 1.1rem;
-  max-width: 60ch;
-  color: var(--ink-soft);
-}
-.lead.light{ color: #D9D9D9; }
-.light{ color: var(--paper); }
-
-/* ---------- Buttons ---------- */
-.btn{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 16px 34px;
-  border-radius: var(--radius);
-  font-weight: 700;
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  border: 2px solid var(--ink);
-  cursor: pointer;
-  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
-}
-.btn-primary{
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--accent-ink);
-}
-.btn-primary:hover{
-  background: var(--ink);
-  border-color: var(--ink);
-  color: var(--accent);
-  transform: translateY(-2px);
-}
-.btn-outline{
-  background: transparent;
-  border-color: var(--paper);
-  color: var(--paper);
-}
-.btn-outline:hover{
-  background: var(--paper);
-  color: var(--ink);
-  transform: translateY(-2px);
-}
-.btn-block{ width: 100%; }
-
-/* ---------- Header ---------- */
-.site-header{
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: rgba(255,255,255,0.94);
-  backdrop-filter: blur(10px);
-  border-bottom: 2px solid var(--ink);
-}
-.header-inner{
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 18px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.brand{
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  letter-spacing: 0.02em;
-  color: var(--ink);
-}
-
-.main-nav{
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
-.main-nav a{ color: var(--ink-soft); position: relative; }
-.main-nav a:not(.nav-cta):after{
-  content:"";
-  position:absolute; left:0; bottom:-4px;
-  width:0; height:2px; background: var(--accent);
-  transition: width .2s ease;
-}
-.main-nav a:not(.nav-cta):hover{ color: var(--ink); }
-.main-nav a:not(.nav-cta):hover:after{ width: 100%; }
-.nav-cta{
-  background: var(--ink);
-  color: var(--paper) !important;
-  padding: 10px 20px;
-  border: 2px solid var(--ink);
-}
-.nav-cta:hover{ background: var(--accent); border-color: var(--accent); color: var(--ink) !important; }
-
-.nav-toggle{
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 6px;
-}
-.nav-toggle span{
-  width: 24px; height: 2px; background: var(--ink);
-}
-
-/* ---------- Hero ---------- */
-.hero{
-  position: relative;
-  background: var(--ink);
-  color: var(--paper);
-  padding: clamp(90px, 14vw, 170px) 24px clamp(90px, 12vw, 140px);
-}
-.hero-content{
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: left;
-}
-.hero h1{ color: var(--paper); }
-.hero-subtitle{
-  font-size: clamp(1.05rem, 2vw, 1.25rem);
-  color: #D9D9D9;
-  max-width: 50ch;
-  margin: 0 0 34px;
-  font-family: var(--font-body);
-  text-transform: none;
-}
-.hero-actions{
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-/* ---------- Sections ---------- */
-.section{ padding: var(--section-pad) 0; }
-.section-alt{ background: var(--sand); }
-.section-dark{ background: var(--ink); }
-.section-dark h2, .section-dark h3{ color: var(--paper); }
-
-.split{
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 60px;
-  align-items: center;
-}
-
-/* ---------- Chi siamo: stat row ---------- */
-.stat-row{
-  display: flex;
-  gap: 0;
-  flex-wrap: wrap;
-  margin-top: 32px;
-}
-.stat{
-  display: flex;
-  flex-direction: column;
-  padding: 20px 28px 20px 0;
-  border-right: 2px solid var(--ink);
-  margin-right: 28px;
-}
-.stat:last-child{ border-right: none; }
-.stat-num{
-  font-family: var(--font-display);
-  font-size: 2.4rem;
-  color: var(--ink);
-}
-.stat-label{ font-size: 0.8rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.04em; }
-
-/* ---------- Image placeholders ---------- */
-.img-placeholder{
-  width: 100%;
-  border: 2px solid var(--ink);
-  background:
-    repeating-linear-gradient(45deg, rgba(10,10,10,0.04) 0 10px, rgba(10,10,10,0.08) 10px 20px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 24px;
-  color: var(--ink-soft);
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
-.img-placeholder[data-ratio="4-5"]{ aspect-ratio: 4/5; }
-.img-placeholder[data-ratio="16-9"]{ aspect-ratio: 16/9; margin-bottom: 18px; }
-
-/* ---------- Mission ---------- */
-.mission-grid{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  margin-top: 44px;
-  background: var(--ink);
-  border: 2px solid var(--ink);
-}
-.mission-block{
-  background: var(--ink);
-  padding: 30px 26px;
-  position: relative;
-}
-.mission-index{
-  display: block;
-  font-family: var(--font-display);
-  font-size: 1.6rem;
-  color: var(--accent);
-  margin-bottom: 10px;
-}
-.mission-block h3{ color: var(--paper); }
-.mission-block p{ color: #D9D9D9; margin: 0; }
-
-/* ---------- Percorsi (blocchi) ---------- */
-.path{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  margin-top: 50px;
-  background: var(--ink);
-  border: 2px solid var(--ink);
-}
-.path-block{
-  background: var(--paper);
-  padding: 40px 30px;
-  transition: transform 0.2s ease, background 0.2s ease;
-}
-.path-block:hover{ transform: translateY(-4px); }
-.path-block-2{ background: var(--accent); }
-.path-block-2 h3, .path-block-2 p, .path-block-2 .path-step{ color: var(--accent-ink); }
-.path-step{
-  display: block;
-  font-family: var(--font-display);
-  font-size: 1rem;
-  letter-spacing: 0.08em;
-  color: var(--gray);
-  margin-bottom: 14px;
-}
-.path-block p{ margin: 0; color: var(--ink-soft); }
-
-/* ---------- Progetti / stories ---------- */
-.cards-grid{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-  margin-top: 44px;
-}
-.story-card h3{ margin-bottom: 8px; }
-.story-card p{ color: var(--ink-soft); }
-.link-arrow{
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  letter-spacing: 0.03em;
-  color: var(--ink);
-  border-bottom: 2px solid var(--accent);
-  display: inline-block;
-  padding-bottom: 2px;
-  transition: color 0.2s ease;
-}
-.link-arrow:hover{ color: var(--ink-soft); }
-
-/* ---------- Risorse ---------- */
-.resource-grid{
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2px;
-  margin-top: 40px;
-  background: var(--ink);
-  border: 2px solid var(--ink);
-}
-.resource-item{
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-  background: var(--paper);
-  padding: 28px;
-  transition: background 0.2s ease;
-}
-.resource-item:hover{ background: var(--sand); }
-.resource-index{
-  font-family: var(--font-display);
-  font-size: 1.8rem;
-  color: var(--accent);
-  -webkit-text-stroke: 1.5px var(--ink);
-  flex-shrink: 0;
-  line-height: 1;
-}
-.resource-item h3{ margin-bottom: 4px; font-size: 1.1rem; }
-.resource-item p{ margin: 0; font-size: 0.92rem; color: var(--ink-soft); }
-
-/* ---------- Contatti ---------- */
-.contact-list{
-  list-style: none;
-  padding: 0;
-  margin: 24px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  color: #D9D9D9;
-}
-.contact-label{
-  text-transform: uppercase;
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  color: var(--accent);
-  display: block;
-  margin-bottom: 2px;
-}
-.contact-list a{ color: var(--paper); border-bottom: 2px solid var(--accent); }
-.social-row{ display: flex; gap: 16px; }
-.social-row a{
-  padding: 8px 0;
-  border-bottom: 2px solid rgba(255,255,255,0.3);
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-.social-row a:hover{ border-color: var(--accent); }
-
-.contact-form{
-  background: var(--paper);
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.contact-form label{
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--ink);
-  margin-top: 14px;
-}
-.contact-form input,
-.contact-form textarea{
-  font-family: var(--font-body);
-  font-size: 1rem;
-  padding: 12px 14px;
-  border-radius: 0;
-  border: 2px solid var(--ink);
-  background: var(--paper);
-  color: var(--ink-soft);
-  resize: vertical;
-}
-.contact-form input:focus,
-.contact-form textarea:focus{
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
-}
-.contact-form button{ margin-top: 18px; }
-.form-note{
-  font-size: 0.82rem;
-  color: var(--ink);
-  min-height: 1.2em;
-  margin: 8px 0 0;
-}
-
-/* ---------- Footer ---------- */
-.site-footer{
-  background: var(--ink);
-  color: #ABABAB;
-  padding: 32px 0;
-  font-size: 0.85rem;
-  border-top: 2px solid var(--accent);
-}
-.footer-inner{
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-/* ---------- Fade-up entrance (hero only, no floating decoration) ---------- */
-.fade-up{
-  opacity: 0;
-  transform: translateY(16px);
-  animation: hero-fade-up 0.7s ease forwards;
-}
-@keyframes hero-fade-up{
-  to{ opacity: 1; transform: translateY(0); }
-}
-
-/* ---------- Scroll reveal ---------- */
-.reveal{
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.reveal.is-visible{ opacity: 1; transform: translateY(0); }
-
-@media (prefers-reduced-motion: reduce){
-  .reveal{ opacity: 1; transform: none; transition: none; }
-  .fade-up{ opacity: 1; transform: none; animation: none; }
-  html{ scroll-behavior: auto; }
-}
-
-/* =========================================================
-   Responsive
-   ========================================================= */
-@media (max-width: 900px){
-  .split{ grid-template-columns: 1fr; }
-  .split-media{ order: -1; }
-  .mission-grid, .cards-grid{ grid-template-columns: 1fr; }
-  .path{ grid-template-columns: 1fr; }
-  .resource-grid{ grid-template-columns: 1fr; }
-}
-
-@media (max-width: 640px){
-  .main-nav{
-    position: fixed;
-    inset: 74px 0 auto 0;
-    background: var(--paper);
-    border-bottom: 2px solid var(--ink);
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 18px 24px;
-    gap: 16px;
-    transform: translateY(-12px);
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.25s ease;
+    // Chiude il menu quando si clicca un link
+    mainNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
   }
-  .main-nav.is-open{
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
+
+  // ---------- Animazioni leggere on-scroll ----------
+  const revealTargets = document.querySelectorAll(
+    '.section .container > *, .path-block, .story-card, .resource-item, .mission-block'
+  );
+  revealTargets.forEach(el => el.classList.add('reveal'));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  revealTargets.forEach(el => observer.observe(el));
+
+  // ---------- Form contatti ----------
+  // GitHub Pages non esegue codice lato server: qui validiamo i campi
+  // e prepariamo un'email pronta da inviare tramite il client di posta
+  // dell'utente. Per un invio diretto senza aprire il client di posta,
+  // si può collegare un servizio esterno gratuito come Formspree
+  // (https://formspree.io) sostituendo l'azione del form.
+  const contactForm = document.getElementById('contactForm');
+  const formNote = document.getElementById('formNote');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = contactForm.name.value.trim();
+      const email = contactForm.email.value.trim();
+      const message = contactForm.message.value.trim();
+
+      if (!name || !email || !message) {
+        formNote.textContent = 'Compila tutti i campi prima di inviare.';
+        formNote.style.color = '#b3462c';
+        return;
+      }
+
+      const subject = encodeURIComponent(`Messaggio da ${name} — Isola Formativa`);
+      const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+      window.location.href = `mailto:info@isolaformativa.it?subject=${subject}&body=${body}`;
+
+      formNote.textContent = 'Si sta aprendo il tuo client di posta con il messaggio pronto.';
+      formNote.style.color = '';
+    });
   }
-  .nav-toggle{ display: flex; }
-  .stat-row{ gap: 0; }
-  .stat{ padding-right: 16px; margin-right: 16px; }
-}
 
-/* =========================================================
-   Effetto "ricomposizione" — solo per il testo della Missione
-   (#missioneText). Scoped, non tocca il resto del sito.
-   Il movimento è calcolato in JS in base alla posizione di
-   scroll: qui serve solo il contesto 3D e il layout di base.
-   ========================================================= */
-.sr-only{
-  position: absolute;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  white-space: nowrap;
-  border: 0;
-}
+});
 
-.shatter-text{
-  perspective: 700px;
-}
+// =========================================================
+// Effetto "accensione" — solo per #missioneText.
+// Il colore di ogni parola passa da grigio spento ad accento
+// lime in base allo scroll (non a un timer): più scrolli
+// veloce, più le parole si accendono in fretta. L'ordine è
+// sequenziale (parola per parola, da sinistra a destra).
+// Una volta completato, resta fisso: non torna indietro
+// nemmeno risalendo con lo scroll.
+// =========================================================
+(function igniteTextEffect() {
+  const el = document.getElementById('missioneText');
+  if (!el) return;
 
-.shatter-text .shatter-word{
-  display: inline-block;
-  white-space: nowrap;
-}
+  // Chi preferisce meno animazioni vede subito il testo normale
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-.shatter-text .shatter-letter{
-  display: inline-block;
-}
+  const originalText = el.textContent.trim();
+
+  // Versione leggibile per screen reader (il testo vero, invariato)
+  const srSpan = document.createElement('span');
+  srSpan.className = 'sr-only';
+  srSpan.textContent = originalText;
+
+  // Versione visiva animata, marcata come decorativa
+  const visual = document.createElement('span');
+  visual.setAttribute('aria-hidden', 'true');
+
+  const words = originalText.split(' ');
+  const wordNodes = [];
+
+  words.forEach((word, i) => {
+    const span = document.createElement('span');
+    span.className = 'ignite-word';
+    span.textContent = word;
+    wordNodes.push(span);
+    visual.appendChild(span);
+    if (i < words.length - 1) {
+      visual.appendChild(document.createTextNode(' '));
+    }
+  });
+
+  el.textContent = '';
+  el.appendChild(srSpan);
+  el.appendChild(visual);
+
+  // Colori di partenza e arrivo: devono coincidere con
+  // --gray (#8A8A8A) e --accent (#C6FF3D) definiti in style.css
+  const FROM = [138, 138, 138];
+  const TO = [198, 255, 61];
+
+  let locked = false;
+  let ticking = false;
+  let scrollStartY = null;
+
+  // REQUIRED_SCROLL_PX = quanti pixel di scroll servono, da
+  // quando il blocco entra nello schermo, perché l'effetto si
+  // completi del tutto. Valore più alto = tutta la sequenza
+  // più lenta a completarsi.
+  const REQUIRED_SCROLL_PX = 400;
+
+  // WORD_SPAN = quanta parte del progresso totale usa ogni
+  // singola parola per sfumare dal grigio al lime (0 a 1).
+  // Valore più alto = ogni parola sfuma più lentamente e le
+  // parole vicine si sovrappongono di più (movimento più
+  // percepibile). Valore basso = ogni parola scatta di colore
+  // quasi di colpo, anche se il totale dura a lungo.
+  const WORD_SPAN = 0.4;
+
+  function overallProgress() {
+    const rect = el.getBoundingClientRect();
+
+    if (scrollStartY === null) {
+      if (rect.top > window.innerHeight) return 0;
+      scrollStartY = window.scrollY;
+    }
+
+    const raw = (window.scrollY - scrollStartY) / REQUIRED_SCROLL_PX;
+    return Math.min(Math.max(raw, 0), 1);
+  }
+
+  function render() {
+    ticking = false;
+    if (locked) return;
+
+    const progress = overallProgress();
+    const N = wordNodes.length;
+
+    wordNodes.forEach((node, i) => {
+      const start = (i / N) * (1 - WORD_SPAN);
+      const local = Math.min(Math.max((progress - start) / WORD_SPAN, 0), 1);
+      const r = Math.round(FROM[0] + (TO[0] - FROM[0]) * local);
+      const g = Math.round(FROM[1] + (TO[1] - FROM[1]) * local);
+      const b = Math.round(FROM[2] + (TO[2] - FROM[2]) * local);
+      node.style.color = `rgb(${r}, ${g}, ${b})`;
+    });
+
+    if (progress >= 1) lockInPlace();
+  }
+
+  function lockInPlace() {
+    locked = true;
+    wordNodes.forEach((node) => {
+      node.style.color = `rgb(${TO[0]}, ${TO[1]}, ${TO[2]})`;
+    });
+    window.removeEventListener('scroll', onScroll);
+    window.removeEventListener('resize', onScroll);
+  }
+
+  function onScroll() {
+    if (locked || ticking) return;
+    ticking = true;
+    requestAnimationFrame(render);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+})();
