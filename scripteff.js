@@ -123,16 +123,13 @@ document.addEventListener('DOMContentLoaded', () => {
       letterSpan.className = 'shatter-letter';
       letterSpan.textContent = char;
 
-      // Punto di partenza sparso su tutta l'area visibile, non solo
-      // a lato del testo: sia lo scarto orizzontale che quello
-      // verticale sono proporzionati all'intero schermo.
-      const tx = (Math.random() * 2 - 1) * (window.innerWidth * 0.65);
-      const ty = (Math.random() * 2 - 1) * (window.innerHeight * 0.6);
+      const fromLeft = Math.random() < 0.5;
+      const distance = window.innerWidth / 2 + 80 + Math.random() * 260;
 
       letters.push({
         node: letterSpan,
-        tx,
-        ty,
+        tx: fromLeft ? -distance : distance,
+        ty: Math.random() * 90 - 45,
         axis: axes[Math.floor(Math.random() * axes.length)],
         angle: 70 + Math.random() * 190,
         start: Math.random() * 0.7,            // soglia casuale: NON legata all'ordine nella frase
