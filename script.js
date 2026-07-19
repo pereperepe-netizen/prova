@@ -159,17 +159,24 @@ document.addEventListener('DOMContentLoaded', () => {
     return 1 - Math.pow(1 - x, 3);
   }
 
-  // 0 = blocco non ancora arrivato, 1 = blocco al centro schermo.
-  // SCROLL_SPAN controlla quanto scroll serve per completare l'effetto:
-  // valore più alto = effetto più lento (serve scrollare di più).
-  const SCROLL_SPAN = window.innerHeight * 5.5;
+  // 0 = blocco non ancora arrivato, 1 = animazione completata.
+  // REQUIRED_SCROLL_PX = quanti pixel devi scrollare, da quando il
+  // blocco entra nello schermo, perché l'effetto si completi.
+  // Valore più alto = effetto più lento. Numero fisso, indipendente
+  // dalla posizione della sezione nella pagina.
+  const REQUIRED_SCROLL_PX = 1400;
+
+  let scrollStartY = null; // impostato al primo istante in cui il blocco entra in vista
 
   function overallProgress() {
     const rect = el.getBoundingClientRect();
-    const elementCenter = rect.top + rect.height / 2;
-    const viewportCenter = window.innerHeight / 2;
-    const startPoint = viewportCenter + SCROLL_SPAN;
-    const raw = (startPoint - elementCenter) / SCROLL_SPAN;
+
+    if (scrollStartY === null) {
+      if (rect.top > window.innerHeight) return 0; // non ancora entrato in viewport
+      scrollStartY = window.scrollY; // fissa il punto di partenza, una sola volta
+    }
+
+    const raw = (window.scrollY - scrollStartY) / REQUIRED_SCROLL_PX;
     return Math.min(Math.max(raw, 0), 1);
   }
 
