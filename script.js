@@ -159,14 +159,17 @@ document.addEventListener('DOMContentLoaded', () => {
     return 1 - Math.pow(1 - x, 3);
   }
 
-  // 0 = blocco non ancora arrivato, 1 = blocco al centro schermo
+  // 0 = blocco non ancora arrivato, 1 = blocco al centro schermo.
+  // SCROLL_SPAN controlla quanto scroll serve per completare l'effetto:
+  // valore più alto = effetto più lento (serve scrollare di più).
+  const SCROLL_SPAN = window.innerHeight * 2.5;
+
   function overallProgress() {
     const rect = el.getBoundingClientRect();
     const elementCenter = rect.top + rect.height / 2;
     const viewportCenter = window.innerHeight / 2;
-    const startPoint = window.innerHeight;
-    const endPoint = viewportCenter;
-    const raw = (startPoint - elementCenter) / (startPoint - endPoint);
+    const startPoint = viewportCenter + SCROLL_SPAN;
+    const raw = (startPoint - elementCenter) / SCROLL_SPAN;
     return Math.min(Math.max(raw, 0), 1);
   }
 
