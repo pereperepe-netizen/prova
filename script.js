@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 0 = blocco non ancora arrivato, 1 = blocco al centro schermo.
   // SCROLL_SPAN controlla quanto scroll serve per completare l'effetto:
   // valore più alto = effetto più lento (serve scrollare di più).
-  const SCROLL_SPAN = window.innerHeight * 2.5;
+  const SCROLL_SPAN = window.innerHeight * 5.5;
 
   function overallProgress() {
     const rect = el.getBoundingClientRect();
