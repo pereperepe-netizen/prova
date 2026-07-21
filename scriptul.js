@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // quando il blocco entra nello schermo, perché l'effetto si
   // completi del tutto. Valore più alto = tutta la sequenza
   // più lenta a completarsi.
-  const REQUIRED_SCROLL_PX = 550;
+  const REQUIRED_SCROLL_PX = 400;
 
   // WORD_SPAN = quanta parte del progresso totale usa ogni
   // singola parola per sfumare dal grigio al lime (0 a 1).
@@ -195,103 +195,4 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
   onScroll();
-})();
-
-// =========================================================
-// Effetto maschera Hero — forma a 90° che cambia in loop,
-// con una foto (per ora un colore segnaposto) che cambia
-// a ogni transizione. Nessuna libreria esterna: le forme
-// hanno tutte lo stesso numero di vertici, quindi bastano
-// coordinate interpolate a mano, frame per frame.
-// Quando ci saranno foto vere, sostituire il <rect> con fill
-// pieno con un <image> (xlink:href) all'interno dello stesso
-// clipPath — la maschera non cambia.
-// =========================================================
-(function heroMaskEffect() {
-  const maskPath = document.getElementById('heroMaskPath');
-  const outline = document.getElementById('heroMaskOutline');
-  const photo = document.getElementById('heroMaskPhoto');
-  if (!maskPath || !outline || !photo) return;
-
-  // Tutte le forme hanno 12 vertici, solo linee orizzontali/verticali
-  const shapes = [
-    [[0,40],[40,40],[40,0],[120,0],[120,30],[160,30],[160,70],[200,70],[200,120],[60,120],[60,90],[0,90]],
-    [[0,20],[60,20],[60,60],[100,60],[100,20],[160,20],[160,90],[120,90],[120,120],[40,120],[40,80],[0,80]],
-    [[0,0],[160,0],[160,30],[200,30],[200,90],[150,90],[150,120],[70,120],[70,80],[20,80],[20,120],[0,120]],
-    [[0,120],[0,90],[50,90],[50,60],[90,60],[90,30],[140,30],[140,70],[180,70],[180,40],[200,40],[200,120]],
-  ];
-
-  // Foto reali, cicliche e indipendenti dal numero di forme (5 foto, 4 forme:
-  // si sfalsano naturalmente passaggio dopo passaggio, senza bisogno di
-  // farle coincidere in numero)
-  const photos = [
-    'images/bici.jpg',
-    'images/calibro.jpg',
-    'images/cucire.jpg',
-    'images/legna.jpg',
-    'images/pc.jpg',
-  ];
-
-  function toPathData(points) {
-    return 'M' + points.map((p) => p[0] + ',' + p[1]).join(' L') + ' Z';
-  }
-
-  function lerpPoints(a, b, t) {
-    return a.map((p, i) => [
-      p[0] + (b[i][0] - p[0]) * t,
-      p[1] + (b[i][1] - p[1]) * t,
-    ]);
-  }
-
-  function easeInOutExpo(t) {
-    if (t === 0 || t === 1) return t;
-    return t < 0.5
-      ? Math.pow(2, 20 * t - 10) / 2
-      : (2 - Math.pow(2, -20 * t + 10)) / 2;
-  }
-
-  const MORPH_MS = 1400;
-  const HOLD_MS = 1400;
-  let current = 0;
-  let photoIndex = 0;
-
-  photo.setAttribute('href', photos[0]);
-  maskPath.setAttribute('d', toPathData(shapes[0]));
-  outline.setAttribute('d', toPathData(shapes[0]));
-
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function morphTo(nextIdx) {
-    const from = shapes[current];
-    const to = shapes[nextIdx];
-    const start = performance.now();
-    const nextPhotoIndex = (photoIndex + 1) % photos.length;
-    let photoSwapped = false;
-
-    function frame(now) {
-      const t = Math.min((now - start) / MORPH_MS, 1);
-      const eased = easeInOutExpo(t);
-      const d = toPathData(lerpPoints(from, to, eased));
-      maskPath.setAttribute('d', d);
-      outline.setAttribute('d', d);
-
-      if (t > 0.5 && !photoSwapped) {
-        photo.setAttribute('href', photos[nextPhotoIndex]);
-        photoSwapped = true;
-      }
-
-      if (t < 1) {
-        requestAnimationFrame(frame);
-      } else {
-        current = nextIdx;
-        photoIndex = nextPhotoIndex;
-        setTimeout(() => morphTo((current + 1) % shapes.length), HOLD_MS);
-      }
-    }
-    requestAnimationFrame(frame);
-  }
-
-  if (!reduceMotion) {
-    setTimeout(() => morphTo(1), HOLD_MS);
-  }
 })();
