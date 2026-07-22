@@ -545,7 +545,7 @@ a{ color: inherit; text-decoration: none; }
   }
   .nav-toggle{ display: flex; }
   #chi-siamo .stat-row{ flex-direction: column; align-items: center; gap: 0; }
-  #chi-siamo .stat{ border-right: none; border-bottom: 2px solid var(--ink); padding: 20px 0; }
+  #chi-siamo .stat{ border-right: none; border-bottom: 2px solid var(--ink); padding: 32px 0 14px; }
   #chi-siamo .stat:last-child{ border-bottom: none; }
 }
 
