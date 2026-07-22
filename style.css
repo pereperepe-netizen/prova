@@ -228,14 +228,7 @@ a{ color: inherit; text-decoration: none; }
 .hero-visual svg{ display: block; width: 100%; height: 100%; }
 
 @media (max-width: 900px){
-  .hero-inner{ flex-direction: column; align-items: stretch; gap: 0; }
-  .hero-visual{
-    order: -1;
-    width: 100%;
-    aspect-ratio: 3 / 1;
-    margin-bottom: 28px;
-  }
-  .hero-visual svg{ width: 100%; height: 100%; }
+  .hero-visual{ display: none; }
 }
 
 /* ---------- Sections ---------- */
