@@ -533,10 +533,12 @@ a{ color: inherit; text-decoration: none; }
    ========================================================= */
 @media (max-width: 900px){
   .split{ grid-template-columns: 1fr; }
+  #chi-siamo .split{ grid-template-columns: 1fr; }
   .split-media{ order: -1; }
   .mission-grid, .cards-grid{ grid-template-columns: 1fr; }
   .path{ grid-template-columns: 1fr; }
   .resource-grid{ grid-template-columns: 1fr; }
+  .section.cutoff::before{ top: 5px; bottom: 5px; }
 }
 
 @media (max-width: 640px){
