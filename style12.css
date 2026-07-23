@@ -22,8 +22,7 @@
   /* Ritmo — angoli squadrati, nessun radius */
   --radius: 0px;
   --radius-sm: 0px;
-  --container: none;
-  --side-pad: clamp(24px, 3vw, 56px);
+  --container: 1160px;
   --section-pad: clamp(64px, 9vw, 120px);
 }
 
@@ -50,7 +49,7 @@ h1,h2,h3{
   text-transform: uppercase;
 }
 
-h1{ font-size: clamp(3.2rem, 9vw, 7.4rem); }
+h1{ font-size: clamp(3.2rem, 9vw, 6.5rem); }
 h2{ font-size: clamp(2.2rem, 5vw, 3.4rem); max-width: 20ch; }
 h3{ font-size: 1.4rem; }
 
@@ -61,7 +60,7 @@ a{ color: inherit; text-decoration: none; }
   width: 100%;
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 var(--side-pad);
+  padding: 0 24px;
 }
 
 .eyebrow{
@@ -137,7 +136,7 @@ a{ color: inherit; text-decoration: none; }
   max-width: none;
   width: 100%;
   margin: 0 auto;
-  padding: 18px var(--side-pad);
+  padding: 18px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -193,11 +192,10 @@ a{ color: inherit; text-decoration: none; }
   position: relative;
   background: var(--ink);
   color: var(--paper);
-  padding: clamp(20px, 3vw, 40px) var(--side-pad) clamp(40px, 5vw, 65px);
+  padding: clamp(20px, 3vw, 40px) 24px clamp(40px, 5vw, 65px);
 }
 .hero-inner{
-  max-width: none;
-  width: 100%;
+  max-width: 1320px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -225,7 +223,7 @@ a{ color: inherit; text-decoration: none; }
 
 .hero-visual{
   flex: 0 0 auto;
-  width: min(760px, 46vw);
+  width: min(540px, 46vw);
   aspect-ratio: 200 / 120;
 }
 .hero-visual svg{ display: block; width: 100%; height: 100%; }
@@ -249,19 +247,12 @@ a{ color: inherit; text-decoration: none; }
   align-items: center;
 }
 
-/* ---------- Chi siamo: regolazioni foto (da rifinire quando arriva l'immagine reale) ---------- */
-/* Posizione verticale rispetto al testo affiancato: numero più alto = foto più in basso */
-#chi-siamo .split-media{
-  margin-top: 10px;
-}
-/* Forma del riquadro foto: es. 4/5 (verticale), 1/1 (quadrato), 16/9 (orizzontale) */
-#chi-siamo .img-placeholder{
-  aspect-ratio: 16/12;
-}
-/* Dimensione della colonna foto rispetto al testo: primo numero = testo, secondo = foto */
 #chi-siamo .split{
-  grid-template-columns: 1.1fr 0.9fr;
   align-items: start;
+}
+
+#chi-siamo .split-media{
+  margin-top: -20px;
 }
 
 /* ---------- Chi siamo: stat row ---------- */
@@ -583,99 +574,4 @@ a{ color: inherit; text-decoration: none; }
 
 .ignite-text .ignite-word{
   display: inline-block;
-}
-
-
-/* =========================================================
-   Sfondo animato globale — "respiro di luce"
-   Un solo livello fisso dietro a tutto il sito. Visibile solo
-   dove le sezioni sono piene (Hero, Missione, Contatti,
-   Footer) o nei tagli trasparenti delle sezioni "cutoff".
-   ========================================================= */
-.ambient-bg{
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: var(--ink);
-  overflow: hidden;
-}
-.ambient-bg .punk-shape{
-  position: absolute;
-  animation: punk-drift 9s ease-in-out infinite;
-}
-.ambient-bg .punk-shape--lime{
-  background: rgba(198,255,61,0.5);
-  width: 46vw;
-  height: 46vw;
-  top: 8%;
-  left: 6%;
-  animation-duration: 11s;
-}
-.ambient-bg .punk-shape--magenta{
-  background: rgba(255,45,149,0.45);
-  width: 38vw;
-  height: 38vw;
-  top: 42%;
-  left: 52%;
-  animation-duration: 8s;
-  animation-delay: 1.5s;
-}
-@keyframes punk-drift{
-  0%   { transform: translate(0, 0)       rotate(0deg); }
-  20%  { transform: translate(6vw, -4vw)  rotate(0deg); }
-  40%  { transform: translate(-3vw, 5vw)  rotate(90deg); }
-  60%  { transform: translate(4vw, 3vw)   rotate(90deg); }
-  80%  { transform: translate(-5vw, -3vw) rotate(180deg); }
-  100% { transform: translate(0, 0)       rotate(180deg); }
-}
-@media (prefers-reduced-motion: reduce){
-  .ambient-shape{ animation: none; }
-}
-@keyframes ambient-breathe{
-  0%, 100%{ transform: scale(0.85); opacity: 0.7; }
-  50%{ transform: scale(1.15); opacity: 1; }
-}
-@media (prefers-reduced-motion: reduce){
-  .ambient-bg::before{ animation: none; transform: scale(1); opacity: 0.85; }
-}
-
-/* =========================================================
-   Sezioni "fluttuanti" (.cutoff) — Chi siamo, Percorsi,
-   Progetti, Risorse. Il colore pieno resta solo nel ~75%
-   centrale; sopra e sotto, taglio netto e trasparenza totale
-   che lascia intravedere il respiro di luce dietro. Un'ombra
-   sfumata lime segna il bordo del taglio, per l'effetto
-   "fluttuante". Missione, Contatti, Hero, Footer non usano
-   questa classe e restano pieni al 100%.
-   ========================================================= */
-.section.cutoff{
-  position: relative;
-  background: transparent;
-  margin: 115px 0;
-}
-.section.cutoff::before{
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 6%;
-  bottom: 6%;
-  background: var(--paper);
-  z-index: 0;
-}
-#chi-siamo.cutoff{
-  margin-top: 0px;
-  padding-top: 48px;
-  padding-bottom: 95px;
-}
-#chi-siamo.cutoff::before{
-  top: 0%;
-}
-
-.section.cutoff.section-alt::before{
-  background: var(--accent);
-}
-.section.cutoff > .container{
-  position: relative;
-  z-index: 1;
 }
