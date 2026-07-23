@@ -538,7 +538,7 @@ a{ color: inherit; text-decoration: none; }
   .mission-grid, .cards-grid{ grid-template-columns: 1fr; }
   .path{ grid-template-columns: 1fr; }
   .resource-grid{ grid-template-columns: 1fr; }
-  .section.cutoff::before{ top: 5px; bottom: 5px; }
+  .section.cutoff::before{ top: 16px !important; bottom: 16px !important; }
 }
 
 @media (max-width: 640px){
