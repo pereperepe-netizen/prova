@@ -539,6 +539,7 @@ a{ color: inherit; text-decoration: none; }
   .path{ grid-template-columns: 1fr; }
   .resource-grid{ grid-template-columns: 1fr; }
   .section.cutoff::before{ top: 16px !important; bottom: 16px !important; }
+  #chi-siamo.cutoff::before{ top: 0 !important; }
 }
 
 @media (max-width: 640px){
