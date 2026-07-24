@@ -198,32 +198,15 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 // =========================================================
-// Effetto maschera Hero — forma a 90° che cambia in loop,
-// con una foto (per ora un colore segnaposto) che cambia
-// a ogni transizione. Nessuna libreria esterna: le forme
-// hanno tutte lo stesso numero di vertici, quindi bastano
-// coordinate interpolate a mano, frame per frame.
-// Quando ci saranno foto vere, sostituire il <rect> con fill
-// pieno con un <image> (xlink:href) all'interno dello stesso
-// clipPath — la maschera non cambia.
+// Effetto mosaico Hero — griglia 5x4 di tessere, ognuna una
+// porzione della stessa foto. Al cambio, le tessere si
+// aggiornano a cascata (partendo dall'angolo in alto a
+// sinistra), non tutte insieme. Nessuna maschera SVG.
 // =========================================================
-(function heroMaskEffect() {
-  const maskPath = document.getElementById('heroMaskPath');
-  const outline = document.getElementById('heroMaskOutline');
-  const photo = document.getElementById('heroMaskPhoto');
-  if (!maskPath || !outline || !photo) return;
+(function heroMosaicEffect() {
+  const mosaic = document.getElementById('heroMosaic');
+  if (!mosaic) return;
 
-  // Tutte le forme hanno 12 vertici, solo linee orizzontali/verticali
-  const shapes = [
-    [[0,40],[40,40],[40,0],[120,0],[120,30],[160,30],[160,70],[200,70],[200,120],[60,120],[60,90],[0,90]],
-    [[0,20],[60,20],[60,60],[100,60],[100,20],[160,20],[160,90],[120,90],[120,120],[40,120],[40,80],[0,80]],
-    [[0,0],[160,0],[160,30],[200,30],[200,90],[150,90],[150,120],[70,120],[70,80],[20,80],[20,120],[0,120]],
-    [[0,120],[0,90],[50,90],[50,60],[90,60],[90,30],[140,30],[140,70],[180,70],[180,40],[200,40],[200,120]],
-  ];
-
-  // Foto reali, cicliche e indipendenti dal numero di forme (5 foto, 4 forme:
-  // si sfalsano naturalmente passaggio dopo passaggio, senza bisogno di
-  // farle coincidere in numero)
   const photos = [
     'images/bici.jpg',
     'images/calibro.jpg',
@@ -232,66 +215,38 @@ document.addEventListener('DOMContentLoaded', () => {
     'images/pc.jpg',
   ];
 
-  function toPathData(points) {
-    return 'M' + points.map((p) => p[0] + ',' + p[1]).join(' L') + ' Z';
+  const COLS = 5, ROWS = 4;
+  const tiles = [];
+
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      const tile = document.createElement('span');
+      tile.style.backgroundSize = `${COLS * 100}% ${ROWS * 100}%`;
+      tile.style.backgroundPosition = `${(c / (COLS - 1)) * 100}% ${(r / (ROWS - 1)) * 100}%`;
+      tile.style.backgroundImage = `url(${photos[0]})`;
+      mosaic.appendChild(tile);
+      tiles.push({ el: tile, col: c, row: r });
+    }
   }
 
-  function lerpPoints(a, b, t) {
-    return a.map((p, i) => [
-      p[0] + (b[i][0] - p[0]) * t,
-      p[1] + (b[i][1] - p[1]) * t,
-    ]);
-  }
-
-  function easeInOutExpo(t) {
-    if (t === 0 || t === 1) return t;
-    return t < 0.5
-      ? Math.pow(2, 20 * t - 10) / 2
-      : (2 - Math.pow(2, -20 * t + 10)) / 2;
-  }
-
-  const MORPH_MS = 1400;
-  const HOLD_MS = 1400;
   let current = 0;
-  let photoIndex = 0;
+  const HOLD_MS = 2600;
 
-  photo.setAttribute('href', photos[0]);
-  maskPath.setAttribute('d', toPathData(shapes[0]));
-  outline.setAttribute('d', toPathData(shapes[0]));
+  function cascadeTo(nextIdx) {
+    const nextPhoto = photos[nextIdx];
+    tiles.forEach((tile) => {
+      const delay = (tile.col + tile.row) * 60;
+      setTimeout(() => {
+        tile.el.style.backgroundImage = `url(${nextPhoto})`;
+      }, delay);
+    });
+    current = nextIdx;
+  }
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function morphTo(nextIdx) {
-    const from = shapes[current];
-    const to = shapes[nextIdx];
-    const start = performance.now();
-    const nextPhotoIndex = (photoIndex + 1) % photos.length;
-    let photoSwapped = false;
-
-    function frame(now) {
-      const t = Math.min((now - start) / MORPH_MS, 1);
-      const eased = easeInOutExpo(t);
-      const d = toPathData(lerpPoints(from, to, eased));
-      maskPath.setAttribute('d', d);
-      outline.setAttribute('d', d);
-
-      if (t > 0.5 && !photoSwapped) {
-        photo.setAttribute('href', photos[nextPhotoIndex]);
-        photoSwapped = true;
-      }
-
-      if (t < 1) {
-        requestAnimationFrame(frame);
-      } else {
-        current = nextIdx;
-        photoIndex = nextPhotoIndex;
-        setTimeout(() => morphTo((current + 1) % shapes.length), HOLD_MS);
-      }
-    }
-    requestAnimationFrame(frame);
-  }
-
   if (!reduceMotion) {
-    setTimeout(() => morphTo(1), HOLD_MS);
+    setInterval(() => {
+      cascadeTo((current + 1) % photos.length);
+    }, HOLD_MS);
   }
 })();

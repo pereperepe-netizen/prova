@@ -16,8 +16,8 @@
   --line:       rgba(10,10,10,0.14);
 
   /* Tipografia */
-  --font-display: 'Bebas Neue', sans-serif;
-  --font-body: 'Montserrat', sans-serif;
+  --font-display: 'Archivo Black', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
 
   /* Ritmo — angoli squadrati, nessun radius */
   --radius: 0px;
@@ -50,7 +50,7 @@ h1,h2,h3{
   text-transform: uppercase;
 }
 
-h1{ font-size: clamp(3.2rem, 9vw, 7.4rem); }
+h1{ font-size: clamp(3.2rem, 7vw, 6rem); }
 h2{ font-size: clamp(2.2rem, 5vw, 3.4rem); max-width: 20ch; }
 h3{ font-size: 1.4rem; }
 
@@ -225,13 +225,25 @@ a{ color: inherit; text-decoration: none; }
 
 .hero-visual{
   flex: 0 0 auto;
-  width: min(760px, 46vw);
-  aspect-ratio: 200 / 120;
+  width: min(646px, 40vw);
+  aspect-ratio: 5 / 4;
 }
-.hero-visual svg{ display: block; width: 100%; height: 100%; }
-
 @media (max-width: 900px){
   .hero-visual{ display: none; }
+}
+
+.hero-mosaic{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 2px;
+  background: var(--ink);
+}
+.hero-mosaic span{
+  background-repeat: no-repeat;
+  filter: grayscale(1) contrast(1.15);
 }
 
 /* ---------- Sections ---------- */
@@ -265,7 +277,7 @@ a{ color: inherit; text-decoration: none; }
 }
 
 /* ---------- Chi siamo: stat row ---------- */
-#chi-siamo .stat-row{
+#numeri .stat-row{
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -273,7 +285,7 @@ a{ color: inherit; text-decoration: none; }
   margin-top: 90px;
 }
 
-#chi-siamo .stat{
+#numeri .stat{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -283,7 +295,7 @@ a{ color: inherit; text-decoration: none; }
   border-right: 2px solid var(--ink);
 }
 
-#chi-siamo .stat:last-child{
+#numeri .stat:last-child{
   border-right: none;
 }
 
@@ -563,9 +575,9 @@ a{ color: inherit; text-decoration: none; }
     pointer-events: auto;
   }
   .nav-toggle{ display: flex; }
-  #chi-siamo .stat-row{ flex-direction: column; align-items: center; gap: 0; }
-  #chi-siamo .stat{ border-right: none; border-bottom: 2px solid var(--ink); padding: 32px 0 14px; }
-  #chi-siamo .stat:last-child{ border-bottom: none; }
+  #numeri .stat-row{ flex-direction: column; align-items: center; gap: 0; }
+  #numeri .stat{ border-right: none; border-bottom: 2px solid var(--ink); padding: 32px 0 14px; }
+  #numeri .stat:last-child{ border-bottom: none; }
 }
 
 /* =========================================================
@@ -659,15 +671,15 @@ a{ color: inherit; text-decoration: none; }
 .section.cutoff::before{
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 1%;
+  right: 1%;
   top: 6%;
   bottom: 6%;
   background: var(--paper);
   z-index: 0;
 }
 #chi-siamo.cutoff{
-  margin-top: 0px;
+  margin-top: 45px;
   padding-top: 48px;
   padding-bottom: 95px;
 }
@@ -681,4 +693,31 @@ a{ color: inherit; text-decoration: none; }
 .section.cutoff > .container{
   position: relative;
   z-index: 1;
+}
+#percorsi.cutoff::before{
+  left: 10vw;
+  right: 0;
+}
+#percorsi .container{
+  padding-left: 12vw;
+  padding-right: var(--side-pad);
+}
+#risorse.cutoff::before{
+  left: 0;
+  right: 12vw;
+}
+#risorse .container{
+  padding-left: var(--side-pad);
+  padding-right: 17vw;
+}
+#numeri.cutoff{
+  margin-top: 45px;
+}
+#numeri.cutoff::before{
+  left: 0;
+  right: 0;
+}
+#numeri .container{
+  padding-left: var(--side-pad);
+  padding-right: var(--side-pad);
 }
