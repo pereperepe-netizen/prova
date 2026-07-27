@@ -552,6 +552,10 @@ a{ color: inherit; text-decoration: none; }
   .resource-grid{ grid-template-columns: 1fr; }
   .section.cutoff::before{ top: 16px !important; bottom: 16px !important; }
   #chi-siamo.cutoff::before{ top: 0 !important; }
+  #percorsi .container{ padding-left: var(--side-pad) !important; padding-right: var(--side-pad) !important; }
+  #risorse .container{ padding-left: var(--side-pad) !important; padding-right: var(--side-pad) !important; }
+  #percorsi.cutoff::before{ left: 0 !important; right: 0 !important; }
+  #risorse.cutoff::before{ left: 0 !important; right: 0 !important; }
 }
 
 @media (max-width: 640px){
@@ -720,4 +724,52 @@ a{ color: inherit; text-decoration: none; }
 #numeri .container{
   padding-left: var(--side-pad);
   padding-right: var(--side-pad);
+}
+/* =========================================================
+   Chi siamo — testo espandibile, tappe, foto separatrice
+   ========================================================= */
+.chi-siamo-copy .eyebrow,
+.chi-siamo-copy h2{
+  margin-top: 0;
+}
+.chi-siamo-copy{
+  display: flow-root;
+  padding-bottom: 32px;
+}
+.chi-siamo-copy h2{
+  margin-bottom: 48px;
+}
+.chi-siamo-copy .split-media{
+  float: right;
+  width: min(560px, 48%);
+  margin: 0 0 20px 40px;
+}
+.chi-siamo-copy p{
+  font-size: 1.1rem;
+  margin: 0 0 16px;
+}
+.chi-siamo-copy p:last-child{
+  margin-bottom: 0;
+}
+
+@media (max-width: 1000px){
+  .chi-siamo-copy{
+    display: flex;
+    flex-direction: column;
+  }
+  .chi-siamo-copy .eyebrow{
+    order: 1;
+  }
+  .chi-siamo-copy h2{
+    order: 2;
+  }
+  .chi-siamo-copy .split-media{
+    float: none;
+    width: 100%;
+    margin: 0 0 24px;
+    order: 3;
+  }
+  .chi-siamo-copy p{
+    order: 4;
+  }
 }

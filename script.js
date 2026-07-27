@@ -250,3 +250,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }, HOLD_MS);
   }
 })();
+
+(function revealZoomEffect() {
+  const targets = document.querySelectorAll('.reveal-zoom');
+  if (!targets.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      entry.target.classList.toggle('is-zoomed', entry.isIntersecting);
+    });
+  }, { threshold: 0.5 });
+
+  targets.forEach((el) => observer.observe(el));
+})();
