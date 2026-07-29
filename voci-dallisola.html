@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voci dall'isola — Isola Formativa</title>
+<meta name="description" content="Testimonianze di chi ha partecipato alle Isole Formative.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="voci.css?v=1">
+</head>
+<body>
+
+<div class="ambient-bg" aria-hidden="true">
+  <span class="punk-shape punk-shape--lime"></span>
+  <span class="punk-shape punk-shape--magenta"></span>
+</div>
+
+<header class="site-header" id="top">
+  <div class="header-inner">
+    <a href="index.html" class="brand">ISOLA FORMATIVA</a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#chi-siamo">Chi siamo</a>
+      <a href="index.html#missione">Missione</a>
+      <a href="index.html#percorsi">Percorsi</a>
+      <a href="index.html#progetti">Progetti</a>
+      <a href="index.html#risorse">Risorse</a>
+      <a href="index.html#contatti" class="nav-cta">Contatti</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="section">
+  <div class="container">
+    <p class="eyebrow">Voci dall'isola</p>
+    <h2>Testimonianze vere.</h2>
+    <p class="lead">Le parole di chi ha vissuto un percorso alle Isole Formative, raccolte qui una dopo l'altra.</p>
+
+    <div class="voci-list" id="vociList">
+      <p class="voci-loading">Caricamento delle testimonianze…</p>
+    </div>
+
+    <p class="voci-back">
+      <a href="index.html#progetti" class="link-arrow">← Torna a Progetti e attività</a>
+    </p>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>Isola Formativa — sito gestito con il contributo dei tirocinanti delle Isole Formative.</p>
+    <p>© <span id="year"></span> Isola Formativa. Tutti i diritti riservati.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+<script src="voci.js?v=1"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+/* =========================================================
+   VOCI DALL'ISOLA — stile dedicato alla pagina delle
+   testimonianze. Usa le stesse variabili di colore/font
+   già definite in style.css (--ink, --paper, --accent,
+   --gray, --font-display, --font-body).
+   ========================================================= */
+
+.voci-list{
+  margin-top: 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.voci-loading{
+  font-style: italic;
+  color: var(--gray);
+}
+
+.voci-card{
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 24px;
+  padding-bottom: 36px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.voci-card:last-child{
+  border-bottom: none;
+}
+
+.voci-photo{
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  background: var(--ink);
+  display: block;
+}
+
+.voci-info{
+  display: flex;
+  flex-direction: column;
+}
+
+.voci-name{
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.voci-company{
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--gray);
+  margin: 2px 0 0;
+}
+
+.voci-year{
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--gray);
+  margin: 2px 0 0;
+}
+
+.voci-text{
+  grid-column: 1 / -1;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 4px 0 0;
+}
+
+.voci-back{
+  margin-top: 48px;
+}
+
+@media (max-width: 560px){
+  .voci-card{
+    grid-template-columns: 1fr;
+  }
+  .voci-photo{
+    width: 90px;
+    height: 90px;
+  }
+}
