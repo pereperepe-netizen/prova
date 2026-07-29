@@ -88,3 +88,11 @@
     height: 90px;
   }
 }
+#testimonianze.cutoff{
+  margin-top: 57px;
+  margin-bottom: 57px;
+}
+#testimonianze.cutoff::before{
+  left: 1%;
+  right: 1%;
+}
