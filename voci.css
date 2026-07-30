@@ -95,4 +95,6 @@
 #testimonianze.cutoff::before{
   left: 1%;
   right: 1%;
+  top: 3%;
+  bottom: 3%;
 }
