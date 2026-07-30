@@ -5,7 +5,10 @@
    --gray, --font-display, --font-body).
    ========================================================= */
 
-.voci-list{
+:root{
+  --voci-card-gap: 45px;
+}
+   .voci-list{
   margin-top: 44px;
   display: flex;
   flex-direction: column;
@@ -18,15 +21,16 @@
 }
 
 .voci-card{
+  position: relative;
   display: grid;
   grid-template-columns: 120px 1fr;
   gap: 24px;
-  padding-bottom: 36px;
-  border-bottom: 2px solid var(--ink);
+  padding: 28px;
+  background: var(--paper);
+  margin-bottom: var(--voci-card-gap);
 }
-
 .voci-card:last-child{
-  border-bottom: none;
+  margin-bottom: 0;
 }
 
 .voci-photo{
