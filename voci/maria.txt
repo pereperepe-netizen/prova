@@ -1,0 +1,15 @@
+Maria
+Fincons Group
+2024
+
+Le mie recenti esperienze di tirocinio mi hanno permesso di sviluppare solide competenze nell'utilizzo dei sistemi gestionali e nell'ottimizzazione dei processi aziendali.
+
+Il mio percorso è iniziato presso Fincons Group, una realtà che mi ha introdotto al mondo di SAP. In questo contesto mi sono occupato della gestione e dell'inserimento dei corsi di formazione dei dipendenti. Successivamente, ho ampliato il mio raggio d'azione collaborando alle attività di onboarding attraverso l'integrazione tra Excel (con utilizzo di macro VBA) e il modulo SAP MM.
+
+Questa combinazione mi ha permesso di comprendere l'importanza dell'automazione nella gestione dei flussi di dati. Spinto dal desiderio di crescita e da una sfida personale, al termine di questa esperienza ho deciso di consolidare le mie basi teoriche frequentando un corso specializzato in contabilità aziendale.
+
+Attualmente, sto svolgendo un nuovo tirocinio focalizzato sulla gestione del credito e sul monitoraggio dei clienti. Utilizzo quotidianamente SAP per l'analisi dei livelli di sollecito (dunning) e gestisco la creazione dei file di sblocco tramite Excel. Per arricchire ulteriormente il mio profilo, sto approfondendo l'uso di un sistema CRM. Questo strumento mi consente di ottenere una visione dettagliata dello stato del cliente e di ottimizzare le strategie per il recupero degli insoluti.
+
+
+Grazie alla continuità tra queste due esperienze, ho trasformato la mia iniziale curiosità per i sistemi ERP in una competenza tecnica concreta e costantemente aggiornata.
+
