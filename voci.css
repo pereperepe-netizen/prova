@@ -92,16 +92,7 @@
     height: 90px;
   }
 }
-#testimonianze.cutoff{
-  margin-top: 35px;
-  margin-bottom: 35px;
-}
-#testimonianze.cutoff::before{
-  left: 1%;
-  right: 1%;
-  top: 20px;
-  bottom: 20px;
-}
+
 .voci-toggle-wrap{
   grid-column: 1 / -1;
   text-align: center;
