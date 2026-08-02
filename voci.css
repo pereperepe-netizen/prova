@@ -17,8 +17,8 @@
 #testimonianze .container{
   padding-left: 1%;
   padding-right: 1%;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding-top: 0;
+  padding-bottom: 1%;
 }
 .voci-loading{
   font-style: italic;
