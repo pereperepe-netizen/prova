@@ -9,9 +9,12 @@
 //                          file .txt); se manca, si usa
 //                          voci/foto/manichino.jpg
 //
-// Per aggiungere una nuova testimonianza: creare il file .txt
-// in /voci, l'eventuale foto in /voci/foto con lo stesso nome,
-// e aggiungere il nome del file a /voci/elenco.txt.
+// L'ordine delle testimonianze è casuale a ogni caricamento
+// della pagina, per dare pari visibilità a tutti.
+//
+// Ogni card mostra al massimo LINES_VISIBLE righe di testo;
+// se il testo è più lungo, compare "Continua a leggere" per
+// espanderla (solo quella card, le altre restano invariate).
 // =========================================================
 
 (async function loadVoci() {
@@ -19,9 +22,19 @@
   if (!list) return;
 
   const FALLBACK_PHOTO = 'voci/foto/manichino.jpg';
+  const CHARS_VISIBLE = 340; // caratteri mostrati prima del taglio
 
   function baseName(fileName) {
     return fileName.replace(/\.txt$/i, '');
+  }
+
+  function shuffle(array) {
+    const a = array.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
   }
 
   function parseEntry(raw) {
@@ -68,13 +81,40 @@
       info.appendChild(year);
     }
 
+    const needsToggle = data.testo.length > CHARS_VISIBLE;
+    const shortText = needsToggle
+      ? data.testo.slice(0, CHARS_VISIBLE).trim() + '…'
+      : data.testo;
+
     const text = document.createElement('p');
     text.className = 'voci-text';
-    text.textContent = data.testo;
+    text.textContent = shortText;
 
     card.appendChild(img);
     card.appendChild(info);
     card.appendChild(text);
+
+    if (needsToggle) {
+      const btnWrap = document.createElement('div');
+      btnWrap.className = 'voci-toggle-wrap';
+
+      const btn = document.createElement('button');
+      btn.className = 'voci-toggle';
+      btn.textContent = 'Continua a leggere';
+      btn.setAttribute('aria-expanded', 'false');
+
+      let expanded = false;
+      btn.addEventListener('click', () => {
+        expanded = !expanded;
+        text.textContent = expanded ? data.testo : shortText;
+        btn.textContent = expanded ? 'Mostra meno' : 'Continua a leggere';
+        btn.setAttribute('aria-expanded', String(expanded));
+      });
+
+      btnWrap.appendChild(btn);
+      card.appendChild(btnWrap);
+    }
+
     return card;
   }
 
@@ -82,10 +122,9 @@
     const indexRes = await fetch('voci/elenco.txt');
     if (!indexRes.ok) throw new Error('Elenco non trovato');
     const indexText = await indexRes.text();
-    const fileNames = indexText
-      .split('\n')
-      .map((l) => l.trim())
-      .filter(Boolean);
+    const fileNames = shuffle(
+      indexText.split('\n').map((l) => l.trim()).filter(Boolean)
+    );
 
     if (fileNames.length === 0) {
       list.innerHTML = '<p class="voci-loading">Nessuna testimonianza disponibile al momento.</p>';
