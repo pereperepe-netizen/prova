@@ -6,15 +6,20 @@
    ========================================================= */
 
 :root{
-  --voci-card-gap: 45px;
+  --voci-card-gap: 22px;
 }
-   .voci-list{
-  margin-top: 44px;
+.voci-list{
+  margin-top: 0;
   display: flex;
   flex-direction: column;
   gap: 40px;
 }
-
+#testimonianze .container{
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
 .voci-loading{
   font-style: italic;
   color: var(--gray);
