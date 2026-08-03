@@ -35,6 +35,7 @@
   padding: 28px;
   background: var(--paper);
   margin-bottom: var(--voci-card-gap);
+  border: 1px solid #FF2D95;
 }
 .voci-card:last-child{
   margin-bottom: 0;
@@ -115,7 +116,7 @@
   color: var(--ink);
   background: none;
   border: none;
-  border-bottom: 2px solid #FF2D95;
+  border-bottom: 2px solid #C6FF3D;
   padding: 0 0 2px;
   cursor: pointer;
 }
