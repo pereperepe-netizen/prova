@@ -35,7 +35,6 @@
   padding: 28px;
   background: var(--paper);
   margin-bottom: var(--voci-card-gap);
-  border-top: 2px solid #FF2D95;
 }
 .voci-card:last-child{
   margin-bottom: 0;
@@ -122,4 +121,12 @@
 }
 .voci-toggle:hover{
   color: #FF2D95;
+}
+.voci-card--left{
+  margin-left: 1%;
+  margin-right: 0;
+}
+.voci-card--right{
+  margin-left: 0;
+  margin-right: 1%;
 }

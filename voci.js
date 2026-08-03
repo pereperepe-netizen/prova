@@ -139,7 +139,9 @@
         if (!res.ok) continue;
         const raw = await res.text();
         const data = parseEntry(raw);
-        list.appendChild(buildCard(fileName, data));
+        const card = buildCard(fileName, data);
+       card.classList.add(list.children.length % 2 === 0 ? 'voci-card--left' : 'voci-card--right');
+       list.appendChild(card);
       } catch (err) {
         console.error('Errore caricando', fileName, err);
       }
