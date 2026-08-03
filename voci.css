@@ -35,7 +35,7 @@
   padding: 28px;
   background: var(--paper);
   margin-bottom: var(--voci-card-gap);
-  border: 1px solid #FF2D95;
+  border: 2px solid #FF2D95;
 }
 .voci-card:last-child{
   margin-bottom: 0;
