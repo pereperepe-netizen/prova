@@ -404,7 +404,7 @@ a{ color: inherit; text-decoration: none; }
 }
 .link-arrow:hover{ color: var(--ink-soft); }
 
-/* ---------- Risorse ---------- */
+/* ---------- Rete ---------- */
 .resource-grid{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -553,9 +553,9 @@ a{ color: inherit; text-decoration: none; }
   .section.cutoff::before{ top: 16px !important; bottom: 16px !important; }
   #chi-siamo.cutoff::before{ top: 0 !important; }
   #strumenti .container{ padding-left: var(--side-pad) !important; padding-right: var(--side-pad) !important; }
-  #risorse .container{ padding-left: var(--side-pad) !important; padding-right: var(--side-pad) !important; }
+  #rete .container{ padding-left: var(--side-pad) !important; padding-right: var(--side-pad) !important; }
   #strumenti.cutoff::before{ left: 0 !important; right: 0 !important; }
-  #risorse.cutoff::before{ left: 0 !important; right: 0 !important; }
+  #rete.cutoff::before{ left: 0 !important; right: 0 !important; }
 }
 
 @media (max-width: 640px){
@@ -660,7 +660,7 @@ a{ color: inherit; text-decoration: none; }
 
 /* =========================================================
    Sezioni "fluttuanti" (.cutoff) — Chi siamo, Strumenti,
-   Progetti, Risorse. Il colore pieno resta solo nel ~75%
+   Progetti, Rete. Il colore pieno resta solo nel ~75%
    centrale; sopra e sotto, taglio netto e trasparenza totale
    che lascia intravedere il respiro di luce dietro. Un'ombra
    sfumata lime segna il bordo del taglio, per l'effetto
@@ -706,11 +706,11 @@ a{ color: inherit; text-decoration: none; }
   padding-left: 12vw;
   padding-right: var(--side-pad);
 }
-#risorse.cutoff::before{
+#rete.cutoff::before{
   left: 0;
   right: 12vw;
 }
-#risorse .container{
+#rete .container{
   padding-left: var(--side-pad);
   padding-right: 17vw;
 }
