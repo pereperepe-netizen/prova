@@ -6,7 +6,7 @@
    ========================================================= */
 
 :root{
-  --voci-card-gap: 11px;
+  --voci-card-gap: 7px;
 }
 .voci-list{
   margin-top: 0;
@@ -21,7 +21,7 @@
   padding-bottom: 1%;
 }
 #testimonianze{
-  padding-top: 0;
+  padding-top: 1%;
 }
 .voci-loading{
   font-style: italic;
