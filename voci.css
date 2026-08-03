@@ -6,7 +6,7 @@
    ========================================================= */
 
 :root{
-  --voci-card-gap: 7px;
+  --voci-card-gap: 1%;
 }
 .voci-list{
   margin-top: 0;
