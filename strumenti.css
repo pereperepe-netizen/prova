@@ -6,7 +6,7 @@
    ========================================================= */
 
 :root{
-  --strumenti-blocco-gap: 1%;
+  --strumenti-blocco-gap: 8%;
 }
 
 #strumenti-dettaglio .container{
@@ -18,7 +18,7 @@
 
 .strumenti-blocco{
   background: var(--paper);
-  padding: 32px;
+  padding: 64px;
   margin-bottom: var(--strumenti-blocco-gap);
 }
 .strumenti-blocco:last-of-type{
@@ -51,4 +51,22 @@
 }
 .voci-back a:hover{
   color: var(--accent);
+}
+.strumenti-blocco:nth-of-type(1){
+  margin-left: 0;
+  margin-right: 8%;
+}
+.strumenti-blocco:nth-of-type(2){
+  margin-left: 8%;
+  margin-right: 0%;
+}
+.strumenti-blocco:nth-of-type(3){
+  margin-left: 0;
+  margin-right: 8%;
+}
+#strumenti-intro{
+  padding-bottom: clamp(40px, 5vw, 65px);
+}
+#strumenti-dettaglio{
+  margin-top: 45px;
 }
