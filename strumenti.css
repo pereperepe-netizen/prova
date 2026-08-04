@@ -10,10 +10,10 @@
 }
 
 #strumenti-dettaglio .container{
-  padding-left: 1%;
-  padding-right: 1%;
+  padding-left: 0;
+  padding-right: 0;
   padding-top: 0;
-  padding-bottom: 1%;
+  padding-bottom: 0;
 }
 
 .strumenti-blocco{
@@ -69,4 +69,5 @@
 }
 #strumenti-dettaglio{
   margin-top: 45px;
+  padding-top: 0;
 }
