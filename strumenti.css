@@ -1,32 +1,47 @@
 /* =========================================================
-   STRUMENTI IN DETTAGLIO — stile dedicato, stesso principio
-   di voci.css: ogni blocco è un pannello bianco a sé, con lo
-   sfondo animato visibile negli spazi tra un blocco e l'altro.
-   Se in futuro si sceglie UN blocco unico invece di tre
-   distinti, basta rimuovere i tre <div class="strumenti-blocco">
-   nell'HTML e unire i paragrafi in un unico flusso: le regole
-   qui sotto restano valide in entrambi i casi.
+   STRUMENTI IN DETTAGLIO — quattro blocchi bianchi (3 con
+   titolo stile Chi siamo + 1 disclaimer senza titolo), con
+   lo stesso principio di trasparenza già usato in voci.css.
+   Un unico punto di controllo per gli spazi, qui sotto.
    ========================================================= */
 
 :root{
   --strumenti-blocco-gap: 1%;
 }
 
+#strumenti-dettaglio .container{
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-top: 0;
+  padding-bottom: 1%;
+}
+
 .strumenti-blocco{
   background: var(--paper);
-  padding: 28px;
+  padding: 32px;
   margin-bottom: var(--strumenti-blocco-gap);
 }
 .strumenti-blocco:last-of-type{
   margin-bottom: 32px;
 }
-.strumenti-blocco h3{
-  margin-top: 0;
+.strumenti-blocco .eyebrow{
   margin-bottom: 12px;
 }
+.strumenti-blocco h2{
+  margin-bottom: 16px;
+}
 .strumenti-blocco p{
-  margin: 0;
+  margin: 0 0 14px;
   font-size: 1.05rem;
   line-height: 1.6;
   color: var(--ink-soft);
+}
+.strumenti-blocco p:last-child{
+  margin-bottom: 0;
+}
+
+.strumenti-disclaimer p{
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--gray);
 }
