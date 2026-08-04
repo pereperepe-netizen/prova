@@ -1,0 +1,32 @@
+/* =========================================================
+   STRUMENTI IN DETTAGLIO — stile dedicato, stesso principio
+   di voci.css: ogni blocco è un pannello bianco a sé, con lo
+   sfondo animato visibile negli spazi tra un blocco e l'altro.
+   Se in futuro si sceglie UN blocco unico invece di tre
+   distinti, basta rimuovere i tre <div class="strumenti-blocco">
+   nell'HTML e unire i paragrafi in un unico flusso: le regole
+   qui sotto restano valide in entrambi i casi.
+   ========================================================= */
+
+:root{
+  --strumenti-blocco-gap: 1%;
+}
+
+.strumenti-blocco{
+  background: var(--paper);
+  padding: 28px;
+  margin-bottom: var(--strumenti-blocco-gap);
+}
+.strumenti-blocco:last-of-type{
+  margin-bottom: 32px;
+}
+.strumenti-blocco h3{
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+.strumenti-blocco p{
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
