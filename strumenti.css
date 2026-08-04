@@ -45,3 +45,9 @@
   font-style: italic;
   color: var(--gray);
 }
+.voci-back a{
+  color: var(--paper);
+}
+.voci-back a:hover{
+  color: var(--accent);
+}

@@ -130,3 +130,9 @@
   margin-left: 0;
   margin-right: 0;
 }
+.voci-back a{
+  color: var(--paper);
+}
+.voci-back a:hover{
+  color: var(--accent);
+}
