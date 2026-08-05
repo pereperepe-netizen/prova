@@ -705,7 +705,7 @@ a{ color: inherit; text-decoration: none; }
   padding-bottom: 95px;
 }
 #chi-siamo{
-  scroll-margin-top: 75px;
+  scroll-margin-top: 50px;
 }
 #chi-siamo.cutoff::before{
   top: 0%;
