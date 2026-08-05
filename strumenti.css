@@ -82,7 +82,7 @@
     padding: 20px;
   }
   #strumenti-dettaglio .container{
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
