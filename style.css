@@ -719,11 +719,11 @@ a{ color: inherit; text-decoration: none; }
   z-index: 1;
 }
 #strumenti.cutoff::before{
-  left: 1%;
+  left: 10vw;
   right: 1%;
 }
 #strumenti .container{
-  padding-left: var(--side-pad);
+  padding-left: calc(10vw + var(--side-pad));
   padding-right: var(--side-pad);
 }
 #rete.cutoff::before{
