@@ -810,11 +810,14 @@ a{ color: inherit; text-decoration: none; }
   margin: 0 0 8px;
 }
 .partner-logo-item{
-  display: flex;
+  display: grid;
+  grid-template-columns: 100px 1fr;
   align-items: center;
+  justify-items: center;
   gap: 16px;
   padding: 16px;
-  border: 1px solid var(--line);
+  border: none;
+  text-align: center;
 }
 .partner-logo-text{
   font-size: 0.85rem;
