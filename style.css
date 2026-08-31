@@ -523,6 +523,10 @@ a{ color: inherit; text-decoration: none; }
 #contatti .split-text{
   padding-right: var(--side-pad);
 }
+#contatti{
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
 
 /* ---------- Footer ---------- */
 .site-footer{
