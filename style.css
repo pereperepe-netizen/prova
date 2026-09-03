@@ -728,7 +728,7 @@ a{ color: inherit; text-decoration: none; }
 }
 #strumenti.cutoff::before{
   left: 10vw;
-  right: 1%;
+  right: 0;
 }
 #strumenti .container{
   padding-left: calc(10vw + var(--side-pad));
