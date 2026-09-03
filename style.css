@@ -852,9 +852,13 @@ a{ color: inherit; text-decoration: none; }
   text-align: center;
 }
 .partner-logo-text{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
   font-size: 0.85rem;
   color: var(--ink-soft);
   line-height: 1.4;
+  text-align: left;
 }
 .partner-logo-item img{
   height: 55px;
