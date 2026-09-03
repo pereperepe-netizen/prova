@@ -213,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'images/cucire.jpg',
     'images/legna.jpg',
     'images/pc.jpg',
+    'images/patrik.jpg'
   ];
 
   const COLS = 5, ROWS = 4;
