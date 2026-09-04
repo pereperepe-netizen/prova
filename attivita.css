@@ -21,7 +21,6 @@
 /* ---------- Introduzione ---------- */
 .attivita-intro{
   padding-bottom: 40px;
-  border-bottom: 1px solid var(--line);
   margin-bottom: 40px;
 }
 .attivita-intro .eyebrow{
@@ -99,6 +98,9 @@
   }
   .attivita-blocco{
     padding: 52px 16px;
+  }
+    .attivita-intro{
+    border-bottom: 1px solid var(--line);
   }
   #attivita-dettaglio .container{
     padding-left: 0;
