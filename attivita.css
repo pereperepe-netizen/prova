@@ -22,7 +22,7 @@
 .attivita-intro{
   padding-bottom: 40px;
   border-bottom: 1px solid var(--line);
-  margin-bottom: 8px;
+  margin-bottom: 40px;
 }
 .attivita-intro .eyebrow{
   margin-bottom: 12px;
@@ -46,14 +46,12 @@
 
 .attivita-item{
   padding: 32px;
-  border-bottom: 1px solid var(--line);
 }
 .attivita-item:nth-child(odd){
   padding-left: 0;
 }
 .attivita-item:nth-child(even){
   padding-right: 0;
-  border-left: 1px solid var(--line);
 }
 .attivita-item:nth-last-child(-n+2){
   border-bottom: none;
@@ -94,15 +92,10 @@
   }
   .attivita-item{
     padding: 24px 0;
-    border-left: none;
-  }
-  .attivita-item:nth-last-child(-n+2){
     border-bottom: 1px solid var(--line);
-    padding-bottom: 24px;
   }
   .attivita-item:last-child{
     border-bottom: none;
-    padding-bottom: 0;
   }
   .attivita-blocco{
     padding: 52px 16px;
